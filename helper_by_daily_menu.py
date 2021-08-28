@@ -3,7 +3,8 @@ from typing import Dict, List
 
 from tabulate import tabulate
 
-from ingredient import get_dish_from
+import config
+from utils import get_dishes_from
 
 
 def get_daymenu_one_dish(filename,
@@ -13,7 +14,7 @@ def get_daymenu_one_dish(filename,
 
     cooking_steps_content = None or []
 
-    dish = get_dish_from(filename)
+    dish = get_dishes_from(filename)
     dish_name = dish['data']['getRecipeById']['title']
     cooking_steps = dish['data']['getRecipeById']['recipeInstructions']
 
@@ -31,12 +32,9 @@ def get_daymenu_one_dish(filename,
 
 
 def main():
-    filename = 'dish.json'
-
-    daymenu = get_daymenu_one_dish(filename)
+    daymenu = get_daymenu_one_dish(config.FILENAME)
 
     print(daymenu)
-
 
 
 if __name__ == '__main__':

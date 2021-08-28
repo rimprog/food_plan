@@ -1,7 +1,11 @@
 from tabulate import tabulate
 
+import config
 
-def get_weekmenu(dishes_names, days_of_week, tablefmt):
+
+def get_weekmenu(dishes_names,
+                 days_of_week=config.DAYS_OF_WEEK,
+                 tablefmt='pretty'):
 
     # List[str] -> List[List[str, str, str]]
     dish_name_template = '{dish_name}_{idx}'
@@ -26,17 +30,6 @@ def get_weekmenu(dishes_names, days_of_week, tablefmt):
 
 def main():
 
-    # headers for the table
-    days_of_week = [
-        'Понедельник',
-        'Вторник',
-        'Среда',
-        'Четверг',
-        'Пятница',
-        'Суббота',
-        'Воскресенье'
-    ]
-
     # content for the table
     dishes_names = [
         'breakfast dish',
@@ -44,9 +37,7 @@ def main():
         'dish for dinner'
     ]
 
-    tablefmt = 'pretty'  # 'orgtbl'  # 'pretty'
-
-    weekmenu = get_weekmenu(dishes_names, days_of_week, tablefmt)
+    weekmenu = get_weekmenu(dishes_names)
 
     print(weekmenu)
 

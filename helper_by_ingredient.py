@@ -3,6 +3,9 @@ import json
 
 from tabulate import tabulate
 
+import config
+from utils import get_dishes_from
+
 
 def get_ingredients(filename,
                     ingrs_names=None,
@@ -12,7 +15,7 @@ def get_ingredients(filename,
 
     ingrs_names, prices = None or [], None or []
 
-    dish = get_dish_from(filename)
+    dish = get_dishes_from(filename)
     ingrs = dish['data']['getRecipeById']['recipeIngredients']
     for ingredient in ingrs:
         ingr_name = ingredient['title']
@@ -31,27 +34,10 @@ def get_ingredients(filename,
     return ingredients
 
 
-def get_dish_from(filename):
-    with open(filename, 'rt') as f:
-        dish = json.load(f)
-
-        return dish
-
-
-def create_parser():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('ingredient', help='Команда `ingredient`')
-
-    return parser
-
-
 def main():
-    filename = 'dish.json'
-
-    ingrs = get_ingredients(filename)
+    ingrs = get_ingredients(config.FILENAME)
 
     print(ingrs)
-
 
 
 if __name__ == '__main__':
