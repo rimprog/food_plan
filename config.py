@@ -14,4 +14,4 @@ DAYS_OF_WEEK = [
     'Воскресенье'
 ]
 
-FILENAME = 'data/dish.json'
+FILENAME = 'data/dishes_all.json'  # 'data/dish.json'
