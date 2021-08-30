@@ -31,7 +31,7 @@ def get_recipe_one_dish(dish: Dict,
     return daymenu_one_dish
 
 
-def get_recipes(for_dishes, for_days=1, with_dishes_in_day=3) -> List[str]:
+def get_recipes(for_dishes: List[Dict], for_days=1, with_dishes_in_day=3) -> List[str]:
 
     recipes = None or []
     dishes_nums = for_days * with_dishes_in_day

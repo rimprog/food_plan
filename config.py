@@ -14,4 +14,6 @@ DAYS_OF_WEEK = [
     'Воскресенье'
 ]
 
-FILENAME = 'data/dishes_all.json'  # 'data/dish.json'
+FILENAME = 'data/dishes_all.json'  # FIXME: изменить название файла
+
+SHELVE_FILENAME = 'dish'

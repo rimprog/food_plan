@@ -1,6 +1,7 @@
 import argparse
 import json
-from typing import Dict
+import random
+from typing import Dict, List
 
 import config
 
@@ -10,6 +11,7 @@ def create_parser():
     parser.add_argument('command_name',
                         choices=config.COMMANDS_NAMES,
                         help='Определяет название команды')
+    parser.add_argument('-day', help='Определяет день недели')  # , default='Понедельник'
 
     return parser
 
@@ -69,3 +71,29 @@ def get_renamed_column(column_name: tuple, with_new_column: str) -> str:
     col_name = ' '.join(list(column_name))
 
     return col_name
+
+
+def get_prepared_for_menu(dishes: List[Dict],
+                          categories_names=('Завтрак', 'Обед', 'Ужин', ),
+                          days=7) -> List[Dict]:
+    
+    """Расставляет блюда в порядке, соответствующем именам категорий."""
+
+    random.shuffle(dishes)
+
+    categories_with_dishes = [list() for _ in categories_names]  #FIXME
+    category_name_and_cipher = dict(zip(categories_names, range(len(categories_names))))
+
+    for dish in dishes:
+        category_name = dish['type']
+        category_cipher = category_name_and_cipher[category_name]
+        dishes_per_category = categories_with_dishes[category_cipher]
+        if days != len(dishes_per_category):  # категория НЕ заполнена нужным кол-вом блюд
+            dishes_per_category.append(dish)
+            continue
+        break  # как только все категории заполнятся
+    
+    time_intervals_with_dishes = zip(*categories_with_dishes)
+    dishes_per_days = [z for z in zip_ for zip_ in time_intervals_with_dishes]
+
+    return dishes_per_days

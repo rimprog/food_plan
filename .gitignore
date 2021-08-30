@@ -6,6 +6,9 @@ __pycache__/
 # IDE
 .vscode/
 
+# Database's files
+*.db
+
 # Distribution / packaging
 # .Python
 eggs/

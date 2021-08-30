@@ -11,6 +11,7 @@ from utils import get_dishes_from, \
 def get_weekmenu(dishes: List[Dict],
                  dishes_names_per_day=None,
                  dishes_names_per_week=None,
+                 categories_names=('Завтрак', 'Обед', 'Ужин', ),
                  tablefmt='grid'):
 
     days_of_week = config.DAYS_OF_WEEK
@@ -21,7 +22,7 @@ def get_weekmenu(dishes: List[Dict],
     for idx, dish in enumerate(dishes_for_week, 1):
         dish_name = dish['data']['getRecipeById']['title']
         fitted_dish_name = get_fitted_cell_size(dish_name)
-        if idx % 3 != 0:  # блюда НЕ объединены в меню на день
+        if idx % len(categories_names) != 0:  # блюда НЕ объединены в меню на день
             dishes_names_per_day.append(fitted_dish_name)
         else:
             dishes_names_per_day.append(fitted_dish_name)
