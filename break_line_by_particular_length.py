@@ -51,12 +51,13 @@ def break_line_by_particular_length(line, max_letters_before_break=20, forced_li
 
     new_line = ''.join(new_line_letters)
 
-    print(new_line)
+    return new_line
 
 
 def main():
     line = 'This is big recipe name. Very Big recipe name. Very very very big recipe name'
-    break_line_by_particular_length(line, max_letters_before_break=20, forced_line_break=False)
+    line_with_breaks = break_line_by_particular_length(line, max_letters_before_break=20, forced_line_break=False)
+    print(line_with_breaks)
 
 if __name__ == '__main__':
     main()
