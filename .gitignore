@@ -14,6 +14,7 @@ __pycache__/
 eggs/
 .eggs/
 for_project/
+src/
 *.egg
 
 # Jupyter Notebook
@@ -37,7 +38,7 @@ __pypackages__/
 .env
 # .venv
 # env/
-# venv/
+venv/
 # ENV/
 # env.bak/
 # venv.bak/
