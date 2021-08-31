@@ -145,13 +145,17 @@ def main():
     parsed_recipes = load_json(parsed_recipes_path)
 
     local_database = create_local_database(parsed_recipes)
+    print('Local database was created successfully.')
 
     updated_local_database = update_local_database(local_database)
+    print('Local database was updated successfully.')
 
     filtered_local_database = filter_local_database(updated_local_database)
+    print('Local database was filtered successfully.')
 
     local_database_name = 'recipes_database.json'
     save_local_database(filtered_local_database, local_database_name)
+    print(f'Local database was saved successfully to "{local_database_name}".')
 
 
 if __name__ == '__main__':
