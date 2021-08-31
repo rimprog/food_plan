@@ -1,34 +1,30 @@
-import random
 from typing import List, Dict
 
 from tabulate import tabulate
 
 import config
 from utils import check_in, \
-                  get_dishes_from, \
-                  set_and_get_nominal_price
+                  get_dishes_from
 
 
 def get_ingredients(dishes: List[Dict],
                     column_names=('Ингредиент', 'Цена'),
                     tablefmt='grid'):
 
-    ingregient_and_price = {}
-    dishes_for_week = random.sample(dishes, 21)
+    """Формирует отсортированную таблицу ингредиентов и цен."""
 
-    for dish in dishes_for_week:
-        ingrs_per_dish = dish['data']['getRecipeById']['recipeIngredients']
+    ingregient_and_price = {}
+    for dish in dishes:
+        ingrs_per_dish = dish['ingredients']
         for ingredient in ingrs_per_dish:
             ingr_name = ingredient['title']
-            # ингредиент уже есть в ingregient_and_price
+            ingr_price = int(ingredient['price'])
+            # Ингредиент уже встречался в предыдущих блюдах
             if check_in(ingregient_and_price, ingr_name):
                 accumulated_price_per_ingr = int(ingregient_and_price[ingr_name])
-                # скорей всего, цены на вновь встретившийся ингредиент в другом блюде нет
-                ingr_price = set_and_get_nominal_price(ingredient)
                 current_ingr_price = accumulated_price_per_ingr + ingr_price
                 ingregient_and_price.update({ingr_name: current_ingr_price})
             else:
-                ingr_price = set_and_get_nominal_price(ingredient)
                 ingregient_and_price.update({ingr_name: ingr_price})
 
     ingregient_and_price_sorted = {k: ingregient_and_price[k] 
