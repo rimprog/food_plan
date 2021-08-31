@@ -1,5 +1,6 @@
 import os
 import json
+import argparse
 
 import requests
 from tqdm import tqdm
@@ -168,7 +169,16 @@ def save_parsing_results(parsing_results, filename):
 
 
 def main():
-    recipes_count = 736
+    parser = argparse.ArgumentParser(
+        description='This script parses recipes from https://www.delikateska.ru/. \
+                     All results are saved to parsing_results folder in json format. \
+                     If you need more information, look README.md in this \
+                     github repository https://github.com/rimprog/food_plan'
+    )
+    parser.add_argument('--count', help='Input required recipes count. Default count: 736')
+    args = parser.parse_args()
+
+    recipes_count = args.count if args.count else 736
     recipes_catalog = parse_recipes_catalog(recipes_count)
     recipes_catalog_filename = 'recipes_catalog.json'
 
