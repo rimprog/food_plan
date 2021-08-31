@@ -1,5 +1,6 @@
 import os
 import json
+import random
 
 
 def load_json(file_path):
@@ -79,15 +80,39 @@ def create_local_database(parsed_recipes):
     return local_database
 
 
-def update_local_database(local_database):
-    updated_recipes = []
-    for recipe in local_database:
+def add_recipes_types(recipes):
+    recipe_types = ['Завтрак', 'Обед', 'Ужин']
+    max_count_one_recipe_type = len(recipes) / len(recipe_types)
+    random.seed(a=2)
+
+    recipes_with_types = []
+    for recipe in recipes:
         if recipe['cooking_time']:
-            recipe['type'] = 'Завтрак' if recipe['cooking_time'] < 20 else 'Обед'
+            recipe['type'] = recipe_types[0] if recipe['cooking_time'] < 20 else random.choice(recipe_types[1:])
         else:
             recipe['type'] = None
 
-        updated_recipes.append(recipe)
+        recipes_with_types.append(recipe)
+
+    return recipes_with_types
+
+
+def add_recipes_costs(recipes):
+    recipes_with_costs = []
+    for recipe in recipes:
+        ingredients_prices = [ingredient['price'] if ingredient['price'] else 0 for ingredient in recipe['ingredients']]
+        sum_ingredients_prices = sum(ingredients_prices)
+
+        recipe['ingredients_price'] = sum_ingredients_prices
+
+        recipes_with_costs.append(recipe)
+
+    return recipes_with_costs
+
+
+def update_local_database(local_database):
+    updated_recipes = add_recipes_types(local_database)
+    updated_recipes = add_recipes_costs(local_database)
 
     return updated_recipes
 
@@ -101,12 +126,16 @@ def check_existence_all_ingredients_prices(recipe):
     return True
 
 
-def filter_local_database(local_database, is_all_prices=True, is_all_types=True):
-    if is_all_prices:
-        local_database_with_filled_ingredients_prices = filter(check_existence_all_ingredients_prices,
-                                                               local_database)
+def filter_local_database(local_database, is_all_ingredients_prices=True, is_all_recipes_types=True):
+    if is_all_ingredients_prices:
+        filtered_local_database = filter(check_existence_all_ingredients_prices,
+                                         local_database)
 
-    filtered_local_database = list(local_database_with_filled_ingredients_prices)
+    if is_all_recipes_types:
+        filtered_local_database = filter(lambda recipe: recipe['type'],
+                                         filtered_local_database)
+
+    filtered_local_database = list(filtered_local_database)
 
     return filtered_local_database
 
