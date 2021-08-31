@@ -49,7 +49,7 @@ _Выдача Пользователю меню на неделю:_
 
 ![f](https://github.com/rimprog/food_plan/blob/I/O_examples/screenshots/dishes_a_week.JPG)
 
-_Выдача прай-листа:_
+_Выдача прайc-листа:_
 
 ![s](https://github.com/rimprog/food_plan/blob/I/O_examples/screenshots/price_list_a_week.JPG)
 
@@ -76,7 +76,7 @@ _Рецепты блюд на день:_
 
 |       Ключ        |     Значение     |   По умолчанию   |
 |-------------------|------------------|------------------|
-|`DISHES_DELIKATESKA_FILENAME`| Имя JSON-файла | - |
+|`DISHES_DELIKATESKA_FILENAME`| Имя JSON-файла с блюдами | - |
 
 
 ### Установка
