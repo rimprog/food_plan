@@ -1,1 +1,2 @@
+environs==9.3.3
 tabulate==0.8.9
