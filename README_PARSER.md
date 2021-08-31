@@ -1,7 +1,3 @@
-# Генератор меню на неделю с общей ценой закупки продуктов
-
-TODO: Общее описание проекта
-
 ## Парсер рецептов с сайта delikateska
 
 Скрипт `parse_delikateska_recipes.py` для парсинга рецептов с сайта доставки продуктов [delikateska](https://www.delikateska.ru/).
@@ -53,7 +49,39 @@ Local database was saved successfully to "recipes_database.json".
 При появлении в консоле надписей с содержанием слова "Error", следует устранить причину возникновения ошибки и попробовать запустить скрипт снова. В случае, если самостоятельно устранить ошибку не удается, обратитесь к [разработчику](https://github.com/rimprog).
 
 Итогово полученная локальная база данных рецептов сохраняется в файл `recipes_database.json` каталога `database` и представляет собой json файл, со следующими ключами (пример):
-TODO вывод из json бд
+```
+"title": "Паста с лисичками",
+"difficult": 3,
+"cooking_time": 15,
+"servings_count": 2,
+"image_link": "some_website/cache/f/9/0cde2d7f-a819-4fc9-847c-5fa379008a52.png/w480.png",
+"ingredients": [
+  {
+    "title": "Итальянская паста на Ваш вкус",
+    "count": "200г",
+    "price": 139
+  },
+  {
+    "title": "Сливки 10-20%",
+    "count": "100г",
+    "price": 173
+  },
+],
+"instructions": [
+  {
+    "step_number": 1,
+    "description": "Лук нарежем соломкой.",
+    "image_link": "some_website/cache/1/3/d03d2f70-ecc0-474f-90b1-87c68cbbe5ab.png/w900h700.png"
+  },
+  {
+    "step_number": 2,
+    "description": "Помидоры черри разрежем пополам на 2 части, петрушку мелко порубим.",
+    "image_link": "some_website/cache/5/b/af907077-5689-4d77-bc2f-cfc2be3e0c4d.png/w900h700.png"
+  },
+],
+"type": "Завтрак",
+"ingredients_price": 1440
+```
 
 ## Цели проекта
 
