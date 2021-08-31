@@ -33,6 +33,20 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+# .Python
+eggs/
+.eggs/
+for_project/
+src/
+*.egg
+
+# IDE
+.vscode/
+
+# Database's files
+*.db
+
+# Distribution / packaging
 .Python
 env/
 build/
@@ -91,3 +105,25 @@ venv/
 src/
 parsing_results/
 database/
+
+# Environments
+.env
+# .venv
+# env/
+venv/
+# ENV/
+# env.bak/
+# venv.bak/
+
+# Example files
+bar.py
+baz.py
+foo.py
+proba*
+*.json
+
+# Example dirs
+
+
+# Linter's settings
+.flake8

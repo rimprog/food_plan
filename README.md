@@ -1,60 +1,113 @@
-# Генератор меню на неделю с общей ценой закупки продуктов
+# Food Plan
+Командный проект № 1 курса от devman
 
-TODO: Общее описание проекта
+## Описание
 
-## Парсер рецептов с сайта delikateska
+Составитель домашнего меню
 
-Скрипт `parse_delikateska_recipes.py` для парсинга рецептов с сайта доставки продуктов [delikateska](https://www.delikateska.ru/).
 
-Чтобы отдельно запустить данный скрипт, проделайте следующие действия:
-- Скачайте репозиторий с кодом, либо перейдите в его корневую директорию, если он уже скачан.
-- Установите зависимости командой `pip install -r requirements.txt`.
-- Запустите parse_delikateska_recipes.py командой `python3 parse_delikateska_recipes.py`.
+### Особенности
 
-Скрипт отправляет запросы в формате graphql и получает qraphql ответы, который сохраняется в формате json.
+* предоставляет возможность:
+    - сформировать меню на неделю на основе [каталога блюд](https://github.com/rimprog/food_plan/wiki/Home/_edit),
+    - получения [прайс-листа](https://github.com/rimprog/food_plan/wiki/Home/_edit),
+    - узнать рецепты блюд:
+        + на неделю,
+        + на день/несколько дней/неделю.
+* образует каталог блюд посредством [парсинга](https://github.com/rimprog/food_plan/blob/master/README.md).
 
-Итоговые результаты парсинга сохраняются в каталог `parsing_results`:
--  Файл `recipes.json` содержит результаты парсинга рецептов. [Пример рецепта](https://www.delikateska.ru/recipes/zapechennaya-noga-yagnenka-s-myatnym-sousom-3799)  собираемого с сайта.
--  Файл `recipes_catalog.json` содержит информацию по id всего количества запрошенных рецептов из [общего каталога рецептов сайта](https://www.delikateska.ru/recipes).
 
-При простом вызове скрипта в консоле, происходит скачивание всех id рецептов (по умолчанию 736 штук) из раздела [Рецепты](https://www.delikateska.ru/recipes). Также при вызове скрипта в командной строке, можно передать необязательный аргумент `--count НУЖНОЕ_КОЛИЧЕСТВО_РЕЦЕПТОВ` для скачивания требуемого количества рецептов. Ниже пример вызова скрипта с указанием скачать 10 рецептов:
+## Сценарии работы
 
-`python3 parse_delikateska_recipes.py --count 10`
+### Легенда "А"
 
-После запуска скрипта, при его корректной работе по ходу скачивания, вам в консоль будет выводиться текущий прогресс закачки. Ниже пример вывода в консоль при успешном сценарии работы скрипта:
+#### Часть 1
+Пользователь решил придерживаться разнообразного питания.
+Утилиту можно использовать для составления меню на неделю.
+Далее, Пользователь желает оценить, в какую сумму обойдутся ингредиенты
+для блюд (на неделю). Взяв прайс-лист, полученный через утилиту,он приобретает 
+ингредиенты и приступает к приготовлению.
+Перед приготовлением, утилита, любезно предоставляет рецепты блюд на день/несколько дней/неделю.
+
+**Сочетания подаваемых команд утилите, для реализации вышеописанной легенды:**
+- weeklymenu & ingredient & dailymenu -day 1
+- weeklymenu & ingredient & dailymenu -day 4
+- weeklymenu & ingredient & dailymenu
+
+
+#### Часть 2
+Пользователь готовится к визиту гостей и хочет приготовить авторское блюдо.
+Утилита поможет ему, выдав рецепт случайного блюда из каталога.
+
+**Сочетания подаваемых команд утилите, для реализации вышеописанной легенды:**
+- randomdailymenu
+
+
+### Примеры работы утилиты
+
+_Выдача Пользователю меню на неделю:_
+![f](https://github.com/rimprog/food_plan/blob/I/O_examples/screenshots/dishes_a_week.JPG)
+
+_Выдача прай-листа:_
+
+![s](https://github.com/rimprog/food_plan/blob/I/O_examples/screenshots/price_list_a_week.JPG)
+
+_Рецепты блюд на день:_
+![t](https://github.com/rimprog/food_plan/blob/I/O_examples/screenshots/dishes_a_day.JPG)
+
+
+### Используемые технологии
+
+* [tabulate](https://pypi.org/project/tabulate/)
+* [shelve](https://docs.python.org/3/library/shelve.html)
+* [requests](https://docs.python-requests.org/en/master/)
+* [tqdm](https://pypi.org/project/tqdm/)
+
+
+### Требования к окружению
+
+* Python 3.7 и выше,
+* Linux/Windows.
+
+
+#### Параметры проекта
+
+|       Ключ        |     Значение     |   По умолчанию   |
+|-------------------|------------------|------------------|
+|`DISHES_DELIKATESKA_FILENAME`| Имя JSON-файла | - |
+
+
+### Установка
+
+```bash
+git clone https://github.com/rimprog/food_plan.git
+cd food_plan
 ```
-Recipes catalog parsed successfully! All data saved to recipes_catalog.json
-100%|███████████████████████████████████████████| 10/10 [00:02<00:00,  4.04it/s]
-10 recipes parsed successfully! All data saved to recipes.json
+создание каталога виртуального окружения (ВО)*
+
+`mkvirtualenv -p` <path> <virtualenv's_name>
+
+связывание каталогов ВО и проекта
+
+`setvirtualenvproject` <virtualenv's_path> <project's_path>
+```bash
+pip install -r requirements.txt
 ```
-При появлении в консоле надписей с содержанием слова "Error", скрипт следует остановить и устранить причину возникновения ошибки, либо обратиться к [разработчику](https://github.com/rimprog).
+запуск скрипта
 
-## Скрипт для создания локальной базы рецептов
+`python food_plan.py` <command_name>
 
-Скрипт `build_local_database.py` создает собственную локальную базу рецептов, наполняя ее рецептами полученными при помощи скрипта `parse_delikateska_recipes.py`.
 
-Чтобы отдельно запустить данный скрипт, проделайте следующие действия:
-- Скачайте репозиторий с кодом, либо перейдите в его корневую директорию, если он уже скачан.
-- Установите зависимости командой `pip install -r requirements.txt`.
-- Следуя [инструкции](https://github.com/rimprog/food_plan#%D0%BF%D0%B0%D1%80%D1%81%D0%B5%D1%80-%D1%80%D0%B5%D1%86%D0%B5%D0%BF%D1%82%D0%BE%D0%B2-%D1%81-%D1%81%D0%B0%D0%B9%D1%82%D0%B0-delikateska) текущей документации, посвященной работе скрипта `parse_delikateska_recipes.py`, получите файл `recipes.json`.
-- Запустите build_local_database.py командой `python3 build_local_database.py`.
+### Пример запуска
 
-Скрипт помимо создания локальной базы данных рецептов, также дополняет информацию о рецептах. Через функцию `update_local_database` добавляется общая стоимость всех ингредиентов рецепта и принадлежность рецепта к одной из 3 категорий: Завтрак, Обед, Ужин.
-
-При помощи функции `filter_local_database` скрипт производит фильтрацию созданной базы рецептов на предмет наличия всех цен на все ингридиенты и наличия указания категории у всех рецептов.
-
-После запуска скрипта, при его корректной работе вы увидите следующий вывод в консоль:
+```bash
+python food_plan.py weeklymenu
+python food_plan.py ingredient
+python food_plan.py dailymenu -day 1
 ```
-Local database was created successfully.
-Local database was updated successfully.
-Local database was filtered successfully.
-Local database was saved successfully to "recipes_database.json".
-```
-При появлении в консоле надписей с содержанием слова "Error", следует устранить причину возникновения ошибки и попробовать запустить скрипт снова. В случае, если самостоятельно устранить ошибку не удается, обратитесь к [разработчику](https://github.com/rimprog).
 
-Итогово полученная локальная база данных рецептов сохраняется в файл `recipes_database.json` каталога `database` и представляет собой json файл, со следующими ключами (пример):
-TODO вывод из json бд
 
-## Цели проекта
 
-Код написан в рамках командного проекта учебной программы от [новичка до Middle](https://dvmn.org/t/middle-python-dev-before-you-finish-the-course/) на онлайн курсах обучению программирования python [Devman](https://dvmn.org/).
+
+
+\* с использованием [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
