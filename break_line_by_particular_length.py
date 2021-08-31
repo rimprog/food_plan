@@ -21,7 +21,9 @@ def find_optimal_space_index_for_breakline(line, max_letters_before_break):
 def replace_optimal_space(line_letters, max_letters_before_break):
     line = ''.join(line_letters)
     optimal_space_index = find_optimal_space_index_for_breakline(line, max_letters_before_break)
+
     first_part_line = line[:optimal_space_index]
+
     try:
         second_part_line = line[optimal_space_index + 1:]
     except TypeError as error:
@@ -29,7 +31,6 @@ def replace_optimal_space(line_letters, max_letters_before_break):
 
     replaced_line = f'{first_part_line}\n{second_part_line}'
     replaced_line_letters = [letter for letter in replaced_line]
-
 
     return replaced_line_letters
 
@@ -57,7 +58,9 @@ def break_line_by_particular_length(line, max_letters_before_break=20, forced_li
 def main():
     line = 'This is big recipe name. Very Big recipe name. Very very very big recipe name'
     line_with_breaks = break_line_by_particular_length(line, max_letters_before_break=20, forced_line_break=False)
+
     print(line_with_breaks)
+
 
 if __name__ == '__main__':
     main()
