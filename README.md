@@ -28,3 +28,7 @@ Recipes catalog parsed successfully! All data saved to recipes_catalog.json
 10 recipes parsed successfully! All data saved to recipes.json
 ```
 При появлении в консоле надписей с содержанием слова "Error", скрипт следует остановить и устранить причину возникновения ошибки, либо обратиться к [разработчику](https://github.com/rimprog).
+
+## Цели проекта
+
+Код написан в рамках командного проекта учебной программы от [новичка до Middle](https://dvmn.org/t/middle-python-dev-before-you-finish-the-course/) на онлайн курсах обучению программирования python [Devman](https://dvmn.org/).
