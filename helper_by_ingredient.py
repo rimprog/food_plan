@@ -8,7 +8,7 @@ from utils import check_in, \
 
 
 def get_ingredients(dishes: List[Dict],
-                    column_names=('Ингредиент', 'Цена'),
+                    column_names=('Ингредиент', 'Цена, руб.'),
                     tablefmt='grid'):
 
     """Формирует отсортированную таблицу ингредиентов и цен."""
