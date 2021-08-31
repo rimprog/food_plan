@@ -5,8 +5,9 @@ def get_dishes(filename, key='dishes'):
     with shelve.open(filename) as storage:
         try:
             dishes = storage[key]
-        except KeyError:
-            raise KeyError('Ошибка использования утилиты!\nНачните с команды `weeklymenu`')  # FIXME
+        except KeyError:  # П-ль нарушил логику работы утилиты
+            msg = 'Ошибка использования утилиты! Начните с команды `weeklymenu`'
+            raise KeyError(msg)
 
         return dishes
 

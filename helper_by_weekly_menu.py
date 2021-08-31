@@ -42,7 +42,7 @@ def get_weekmenu(dishes: List[Dict],
 
 def main():
 
-    dishes = get_dishes_from(config.FILENAME)
+    dishes = get_dishes_from(config.DELIKATESKA_FILENAME)
 
     weekmenu = get_weekmenu(dishes)
 

@@ -1,10 +1,10 @@
 """
+Принимает данные от пользователя в виде команд и отрабатывает
+согласно логике, предусмотренной сценарием (см. README проекта).
 
-Принимает данные от П-я в виде команд и отрабатывает
-    согласно логике, предусмотренной сценарием.
-Формирует ответ в виде таблиц
+Выбирает блюда из каталога случайным образом.
 
-Работает со списком блюд, образованным случайным образом
+Формирует ответ в виде таблиц.
 """
 
 
@@ -25,7 +25,7 @@ def main():
     dailymenu = config.COMMANDS_NAMES[2]
     randomdailymenu = config.COMMANDS_NAMES[3]
 
-    dishes = get_dishes_from(config.FILENAME)
+    dishes = get_dishes_from(config.DELIKATESKA_FILENAME)
     dishes_to_menu = get_prepared_for_menu(dishes)
 
     parser = create_parser()
@@ -51,9 +51,9 @@ def main():
         prepared_dishes = shelver.get_dishes(config.SHELVE_FILENAME)
         dailymenu = helper_by_daily_menu.get_recipes(prepared_dishes, for_days=7)
         print(*dailymenu)
+        shelver.delete_dishes(config.SHELVE_FILENAME)
     elif command_name_from_user == randomdailymenu:
-        # Сделать 3 блюда на день
-        dailymenu = helper_by_daily_menu.get_recipes(dishes_to_menu, for_days=1, with_dishes_in_day=1)
+        dailymenu = helper_by_daily_menu.get_recipes(dishes_to_menu, for_days=1, with_dishes_in_day=3)
         print(*dailymenu)
 
 

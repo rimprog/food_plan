@@ -18,7 +18,8 @@ def get_recipe_one_dish(dish: Dict,
 
     for cooking_step in cooking_steps:
         cooking_step_content = cooking_step['description']
-        cooking_step_fitted_by_cell_size = break_line_by_particular_length(cooking_step_content, max_letters_before_break=100)
+        cooking_step_fitted_by_cell_size = break_line_by_particular_length(cooking_step_content,
+                                                                           max_letters_before_break=100)
         cooking_steps_content.append(cooking_step_fitted_by_cell_size)
 
     col_name = get_renamed_column(column_names, dish_name)
@@ -52,7 +53,7 @@ def get_recipes(for_dishes: List[Dict],
 
 
 def main():
-    dishes = get_dishes_from(config.FILENAME)
+    dishes = get_dishes_from(config.DELIKATESKA_FILENAME)
 
     recipes = get_recipes(dishes, 2, 2)
 

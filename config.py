@@ -1,3 +1,9 @@
+from environs import Env
+
+
+env = Env()
+env.read_env()
+
 CATEGORIES_NAMES = [
     'Завтрак',
     'Обед',
@@ -21,8 +27,6 @@ DAYS_OF_WEEK = [
     'Воскресенье'
 ]
 
-FILENAME = 'data/dishes.json'  # FIXME: изменить название файла  'data/dishes_all.json' 'data/dishes_gt_21_with_category.json' 'data/dishes.json'
+DELIKATESKA_FILENAME = env('DISHES_DELIKATESKA_FILENAME')
 
 SHELVE_FILENAME = 'dish'
-
-# TABLE_FORMAT = ..

@@ -11,7 +11,7 @@ def get_ingredients(dishes: List[Dict],
                     column_names=('Ингредиент', 'Цена, руб.'),
                     tablefmt='grid'):
 
-    """Формирует отсортированную таблицу ингредиентов и цен."""
+    """Формирует прайс-лист, отсортированный по названиям ингредиентов"""
 
     ingregient_and_price = {}
     for dish in dishes:
@@ -38,7 +38,7 @@ def get_ingredients(dishes: List[Dict],
 
 
 def main():
-    dishes = get_dishes_from(config.FILENAME)
+    dishes = get_dishes_from(config.DELIKATESKA_FILENAME)
 
     ingrs = get_ingredients(dishes)
 

@@ -12,7 +12,9 @@ def create_parser():
     parser.add_argument('command_name',
                         choices=config.COMMANDS_NAMES,
                         help='Определяет название команды')
-    parser.add_argument('-day', type=int, help='Определяет день недели')  # , default='Понедельник'
+    parser.add_argument('-day',
+                        type=int,
+                        help='Определяет кол-во дней, для которых предоставить рецепты')
 
     return parser
 
@@ -30,7 +32,9 @@ def check_in(iterable: Dict[str, int], name):
     return in_iterable
 
 
-def get_renamed_column(column_name: tuple, with_new_column: str) -> str:
+def get_renamed_column(column_name: tuple,
+                       with_new_column: str) -> str:
+    
     column_name += (with_new_column, )
     col_name = ' '.join(list(column_name))
 
@@ -45,7 +49,7 @@ def get_prepared_for_menu(dishes: List[Dict],
 
     random.shuffle(dishes)
 
-    categories_with_dishes = [list() for _ in categories_names]  #FIXME
+    categories_with_dishes = [list() for _ in categories_names]
     category_name_and_cipher = dict(zip(categories_names, range(len(categories_names))))
 
     for dish in dishes:
